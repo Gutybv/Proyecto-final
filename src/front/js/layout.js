@@ -5,10 +5,14 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import SignupCard from "./pages/signupcard";
+import LoginCard from "./pages/logincard";
+import ForgotPasswordCard from "./pages/forgotpasswordcard";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+
 import SidebarWithHeader from "./component/sideBar.jsx";
 
 //create your first component
@@ -21,14 +25,15 @@ const Layout = () => {
     <div>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
-          <SidebarWithHeader />
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
+            <Route element={<SignupCard />} path="/signupcard" />
+            <Route element={<LoginCard />} path="/logincard" />
+            <Route element={<ForgotPasswordCard />} path="/forgotpasswordcard" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
-          <Footer />
         </ScrollToTop>
       </BrowserRouter>
     </div>
