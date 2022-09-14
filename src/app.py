@@ -11,6 +11,10 @@ from api.models import db, User
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+from flask_jwt_extended import JWTManager
 
 #from models import Person
+
 app = Flask(__name__)
+app.config ["JWT_SECRET_KEY"] = os.environ.get('FLASK_APP_KEY', 'sample key')
+jwt = JWTManager(app)
