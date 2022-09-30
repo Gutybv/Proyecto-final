@@ -15,6 +15,7 @@ import {
   Text,
   useDisclosure,
   BoxProps,
+  Button,
   FlexProps,
   Menu,
   MenuButton,
@@ -22,6 +23,7 @@ import {
   MenuItem,
   MenuList,
   Image,
+  
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -40,8 +42,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Spinner } from "@chakra-ui/react";
 
 const LinkItems = [
-  { name: "Home", icon: FiHome, ruta: "./" },
-  { name: "Conversor", icon: FiTrendingUp, ruta: "./" },
+  { name: "Home", icon: FiHome, ruta: "./inicio" },
+  { name: "Conversor", icon: FiTrendingUp, ruta: "./conversor" },
   { name: "Educacion", icon: FiBook, ruta: "./educacion" },
   { name: "Favoritos", icon: FiStar, ruta: "./" },
   { name: "What if", icon: SiFuturelearn, ruta: "./whatif" },
@@ -64,6 +66,7 @@ export default function SidebarWithHeader({ children }) {
         onClose={() => onClose}
         display={{ base: "none", md: "block" }}
       />
+     
       <Drawer
         autoFocus={false}
         isOpen={isOpen}
@@ -88,8 +91,9 @@ export default function SidebarWithHeader({ children }) {
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
+  const {loginWithRedirect} = useAuth0();
   return (
-
+    
     <Box
       transition="3s ease"
       bg={useColorModeValue("white", "gray.900")}
@@ -100,6 +104,16 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}
     >
+      <Button
+                onClick={() =>loginWithRedirect() }
+                type="submit"
+                  bg={'rgb(140,82,255)'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'rgb(140,82,255)',
+                  }}>
+                  Login con Auth0 o Google
+                </Button>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Box pt={10}>
           <Image
@@ -107,7 +121,9 @@ const SidebarContent = ({ onClose, ...rest }) => {
             objectFit="cover"
             src="https://soft-sandwich-76b.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F9a6ea0a8-374d-4052-ab10-90adc1837057%2FLogoDefinitivosinLetra.png?table=block&id=1a09e77a-e576-48dc-8719-e84863fa4e99&spaceId=44514f37-bf45-41b8-90cd-647cbf4961f7&width=1000&userId=&cache=v2"
           />
+          
         </Box>
+        
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
         
       </Flex>
@@ -117,18 +133,22 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </NavItem>
         
       ))}
+      
     </Box>
+    
     
   );
 };
 
 const NavItem = ({ icon, children, ruta, ...rest }) => {
   return (
+    
     <Link
       href={ruta}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
+      
       <Flex
         align="center"
         p="4"
@@ -144,6 +164,7 @@ const NavItem = ({ icon, children, ruta, ...rest }) => {
       >
         
         
+        
         {icon && (
           <Icon
             mr="4"
@@ -153,13 +174,17 @@ const NavItem = ({ icon, children, ruta, ...rest }) => {
             }}
             as={icon}
           />
+          
         )}
         {children}
         
       </Flex>
     </Link>
+    
   );
+  
 };
+
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const {user, isAuthenticated, isLoading} = useAuth0();
@@ -177,6 +202,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       justifyContent={{ base: "space-between", md: "flex-end" }}
       {...rest}
     >
+     
       <IconButton
         display={{ base: "flex", md: "none" }}
         onClick={onOpen}
@@ -209,6 +235,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               transition="all 0.3s"
               _focus={{ boxShadow: "none" }}
             >
+             
               
               <HStack>
                 <Avatar
@@ -229,6 +256,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                 <Box display={{ base: "none", md: "flex" }}>
                   <FiChevronDown />
                 </Box>
+                
               </HStack>
             </MenuButton>
             <MenuList
@@ -244,9 +272,14 @@ const MobileNav = ({ onOpen, ...rest }) => {
           </Menu>
         </Flex>
       </HStack>
+      
     </Flex>
+    
     
     )
   );
+  
   return <div></div>;
+  
 };
+

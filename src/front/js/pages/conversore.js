@@ -15,8 +15,9 @@ export const Conversor = () => {
   return (
     <div className="home">
          {/* <Perfil/> */}
-         <SidebarWithHeader/>
+         <SidebarWithHeader/> 
           <CurrrencyConverter />
+           
           <br/>
           <br/>
           <br/>
